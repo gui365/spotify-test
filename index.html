@@ -12,7 +12,7 @@
   <h1>Open the console</h1>
   <button type='submit' onclick="search()">Search</button>
   <script type="text/javascript">
-  
+
     const clientId = 'ee167b114e8e41d7b138fed6f6a30aef';
     const redirectUri = "https://gui365.github.io/spotify-test/";
     let accessToken;
@@ -34,8 +34,18 @@
       if (accessToken) {
         return accessToken;
       }
-      const accessURL = `https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=token&scope=playlist-modify-public&redirect_uri=${redirectUri}`;
-      window.location = accessURL;
+      const tokenValue = window.location.href.match(/access_token=([^&]*)/);
+      const tokenExpiration = window.location.href.match(/expires_in=([^&]*)/);
+      if (tokenValue && tokenExpiration) {
+        accessToken = tokenValue[1];
+        const expiresIn = Number(tokenExpiration[1]);
+        window.setTimeout(() => accessToken = '', expiresIn * 1000);
+        window.history.pushState('Access Token', null, '/');
+        return accessToken;
+      } else {
+        const accessURL = `https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=token&scope=playlist-modify-public&redirect_uri=${redirectUri}`;
+        window.location = accessURL;
+      }
     }
   </script>
 </body>
