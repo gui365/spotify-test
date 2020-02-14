@@ -36,19 +36,19 @@
         console.log('accessToken', accessToken)
         return accessToken;
       }
-      // const tokenValue = window.location.href.match(/access_token=([^&]*)/);
-      // const tokenExpiration = window.location.href.match(/expires_in=([^&]*)/);
-      // if (tokenValue && tokenExpiration) {
-      //   accessToken = tokenValue[1];
-      //   const expiresIn = Number(tokenExpiration[1]);
-      //   window.setTimeout(() => accessToken = '', expiresIn * 1000);
-      //   window.history.pushState('Access Token', null, '/');
-      //   return accessToken;
-      // } else {
+      const tokenValue = window.location.href.match(/access_token=([^&]*)/);
+      const tokenExpiration = window.location.href.match(/expires_in=([^&]*)/);
+      if (tokenValue && tokenExpiration) {
+        accessToken = tokenValue[1];
+        const expiresIn = Number(tokenExpiration[1]);
+        window.setTimeout(() => accessToken = '', expiresIn * 1000);
+        window.history.pushState('Access Token', null, '/');
+        return accessToken;
+      } else {
       const accessURL = `https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=token&scope=playlist-modify-public&redirect_uri=${redirectUri}`;
       window.location = accessURL;
       console.log('accessToken', accessToken)
-      // }
+      }
     }
   </script>
 </body>
