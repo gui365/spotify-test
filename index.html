@@ -24,7 +24,6 @@
       return fetch(`https://api.spotify.com/v1/search?type=track&q=yellow`, {
         headers: { Authorization: `Bearer ${accessToken}` }
       }).then(response => {
-        console.log('response before JSON', response);
         return response.json();
       }).then(jsonResponse => {
         console.log('response after JSON', jsonResponse);
@@ -48,6 +47,8 @@
         window.location = accessURL;
       // }
     }
+
+    getToken();
   </script>
 </body>
 
