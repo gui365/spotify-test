@@ -32,6 +32,7 @@
 
     const getToken = () => {
       if (accessToken) {
+        console.log('accessToken', accessToken)
         return accessToken;
       }
       // const tokenValue = window.location.href.match(/access_token=([^&]*)/);
@@ -43,12 +44,12 @@
       //   window.history.pushState('Access Token', null, '/');
       //   return accessToken;
       // } else {
-        const accessURL = `https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=token&scope=playlist-modify-public&redirect_uri=${redirectUri}`;
-        window.location = accessURL;
+      const accessURL = `https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=token&scope=playlist-modify-public&redirect_uri=${redirectUri}`;
+      window.location = accessURL;
+      console.log('accessToken', accessToken)
       // }
     }
 
-    getToken();
   </script>
 </body>
 
