@@ -10,6 +10,7 @@
 
 <body>
   <h1>Open the console</h1>
+  <button type='submit' onclick="search()">Search</button>
   <script type="text/javascript">
   
     const clientId = 'ee167b114e8e41d7b138fed6f6a30aef';
@@ -17,7 +18,8 @@
     let accessToken;
 
     const search = (term) => {
-      const accessToken = Spotify.getAccessToken();
+      event.preventDefault();
+      const accessToken = getToken();
       return fetch(`https://api.spotify.com/v1/search?type=track&q=yellow`, {
         headers: { Authorization: `Bearer ${accessToken}` }
       }).then(response => {
