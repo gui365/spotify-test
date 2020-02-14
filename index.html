@@ -20,13 +20,14 @@
     const search = (term) => {
       event.preventDefault();
       const accessToken = getToken();
+      console.log(accessToken)
       return fetch(`https://api.spotify.com/v1/search?type=track&q=yellow`, {
         headers: { Authorization: `Bearer ${accessToken}` }
       }).then(response => {
         console.log('response before JSON', response);
         return response.json();
       }).then(jsonResponse => {
-        console.log('response after JSON', response);
+        console.log('response after JSON', jsonResponse);
       });
     }
 
